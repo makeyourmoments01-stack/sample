@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lavender-deep: #7B5EA7;
+    --lavender-mid: #9B7FBF;
+    --lavender-light: #C8B4E0;
+    --lavender-pale: #EDE0F5;
+    --lavender-blush: #F7F0FF;
+    --lavender-white: #FDFAFF;
+    --gold: #C9A84C;
+    --text-dark: #3D2B5E;
+    --text-mid: #6B4F8E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-snap-type: y mandatory; overflow-y: scroll; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--lavender-blush);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── PAGES ── */
+  .page {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1.5rem;
+  }
+
+  /* ══ PAGE 1 – BIRTHDAY WISH ══ */
+  #page1 {
+    background: linear-gradient(160deg, #EDE0F5 0%, #D8C0F0 40%, #C0A0E0 80%, #A880D0 100%);
+  }
+
+  .petals-bg {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    width: 12px; height: 20px;
+    background: radial-gradient(ellipse, #fff8 60%, #C8B4E040 100%);
+    border-radius: 50% 0 50% 0;
+    animation: falling linear infinite;
+    opacity: 0;
+  }
+  @keyframes falling {
+    0%   { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .wish-card {
+    text-align: center;
+    z-index: 2;
+    animation: fadeUp 1.2s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .wish-emoji { font-size: clamp(3rem, 10vw, 6rem); animation: pulse 2.5s ease infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.12);} }
+
+  .wish-to {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--text-mid);
+    letter-spacing: 0.18em;
+    margin: 1.2rem 0 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .wish-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 9vw, 6rem);
+    font-weight: 300;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .wish-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 5vw, 3rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lavender-deep);
+    margin-bottom: 1.5rem;
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 0.8rem;
+    margin: 1rem auto; max-width: 300px;
+  }
+  .divider-line { flex:1; height:1px; background: var(--lavender-mid); opacity:0.5; }
+  .divider-gem { color: var(--gold); font-size: 0.9rem; }
+
+  .wish-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.8vw, 1.35rem);
+    color: var(--text-mid);
+    max-width: 520px;
+    line-height: 1.8;
+    margin: 0 auto 2rem;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    color: var(--lavender-deep); font-size: 0.75rem; letter-spacing: 0.12em;
+    opacity: 0.7; animation: bounce 2s ease infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(6px);} }
+  .scroll-hint svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:2; }
+
+  /* ══ PAGE 2 – IMAGES ══ */
+  #page2 {
+    background: linear-gradient(140deg, #F7F0FF 0%, #E8D8F8 50%, #D5C0F0 100%);
+    padding: 3rem 1.5rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    font-style: italic;
+    color: var(--lavender-deep);
+    text-align: center;
+    margin-bottom: 0.4rem;
+    animation: fadeUp 1s ease both;
+  }
+  .section-sub {
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--lavender-mid);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 680px;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .photo-frame {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px #9B7FBF30;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    aspect-ratio: 1;
+    background: var(--lavender-pale);
+    border: 3px solid #fff;
+  }
+  .photo-frame:hover {
+    transform: scale(1.04);
+    box-shadow: 0 16px 48px #7B5EA750;
+  }
+
+  .photo-upload-label {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100%; gap: 0.5rem;
+    color: var(--lavender-mid); font-size: 0.78rem; letter-spacing: 0.08em;
+    cursor: pointer; transition: background 0.3s;
+  }
+  .photo-upload-label:hover { background: #C8B4E020; }
+  .photo-upload-label svg { width:36px; height:36px; stroke: var(--lavender-light); fill:none; stroke-width:1.5; }
+
+  .photo-img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: none;
+  }
+  .photo-frame.has-img .photo-img { display: block; }
+  .photo-frame.has-img .photo-upload-label { display: none; }
+
+  input[type="file"] { display: none; }
+
+  .photo-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, #7B5EA7AA);
+    color: #fff; font-size: 0.7rem; letter-spacing: 0.12em;
+    padding: 1rem 0.5rem 0.5rem;
+    text-align: center; text-transform: uppercase;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .photo-frame:hover .photo-caption { opacity: 1; }
+
+  .upload-note {
+    text-align: center; font-size: 0.72rem; color: var(--lavender-mid);
+    margin-top: 1rem; letter-spacing: 0.08em;
+  }
+
+  /* ══ PAGE 3 – LETTER ══ */
+  #page3 {
+    background: linear-gradient(155deg, #EDE0F5 0%, #D8C4EE 50%, #C8AADE 100%);
+    padding: 3rem 1.5rem;
+  }
+
+  .letter-wrap {
+    max-width: 640px;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .letter-paper {
+    background: linear-gradient(160deg, #FDFAFF 0%, #F5EEF8 100%);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 12px 48px #9B7FBF28, 0 2px 0 #C8B4E0 inset;
+    border: 1px solid #E0D0F0;
+    position: relative;
+    animation: fadeUp 1s ease both;
+  }
+  .letter-paper::before {
+    content: '';
+    position: absolute; top: 0; left: 2.8rem; right: 2.8rem; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--lavender-light), transparent);
+    border-radius: 0 0 4px 4px;
+  }
+
+  .letter-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--lavender-mid);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.06em;
+  }
+
+  .letter-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 2;
+    color: var(--text-dark);
+    width: 100%;
+    min-height: 220px;
+    background: transparent;
+    border: none; outline: none; resize: none;
+    font-style: italic;
+  }
+
+  .letter-closing {
+    margin-top: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--text-mid);
+    font-style: italic;
+  }
+  .letter-signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--lavender-deep);
+    margin-top: 0.3rem;
+    font-style: italic;
+    width: 100%;
+    background: transparent;
+    border: none; outline: none;
+    border-bottom: 1px solid var(--lavender-light);
+  }
+
+  .edit-note {
+    text-align: center; font-size: 0.72rem; color: var(--lavender-mid);
+    margin-top: 0.8rem; letter-spacing: 0.08em;
+  }
+
+  /* ══ PAGE 4 – VIDEO + MUSIC ══ */
+  #page4 {
+    background: linear-gradient(145deg, #C8AADE 0%, #B090CE 40%, #9870BE 80%, #7B5EA7 100%);
+    padding: 3rem 1.5rem;
+  }
+
+  #page4 .section-title { color: var(--lavender-pale); }
+  #page4 .section-sub { color: var(--lavender-light); }
+
+  .media-stack {
+    display: flex; flex-direction: column; gap: 1.5rem;
+    max-width: 640px; width: 100%; z-index: 2;
+  }
+
+  .video-box {
+    border-radius: 20px; overflow: hidden;
+    background: #5A3F80;
+    box-shadow: 0 12px 48px #3D2B5E60;
+    border: 2px solid #C8B4E040;
+  }
+
+  .video-placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 220px; gap: 0.8rem; cursor: pointer;
+    color: var(--lavender-light); font-size: 0.78rem; letter-spacing: 0.1em;
+    transition: background 0.3s;
+  }
+  .video-placeholder:hover { background: #ffffff10; }
+  .video-placeholder svg { width: 48px; height: 48px; stroke: var(--lavender-light); fill: none; stroke-width: 1.5; }
+
+  video { display: none; width: 100%; border-radius: 18px; }
+  .video-box.has-video video { display: block; }
+  .video-box.has-video .video-placeholder { display: none; }
+
+  .music-player {
+    background: linear-gradient(135deg, #5A3F8080, #7B5EA780);
+    backdrop-filter: blur(20px);
+    border-radius: 20px; padding: 1.5rem;
+    border: 1px solid #C8B4E030;
+    box-shadow: 0 8px 32px #3D2B5E40;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  .music-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--lavender-pale);
+    text-align: center;
+  }
+
+  audio { width: 100%; accent-color: var(--lavender-light); }
+  audio::-webkit-media-controls-panel { background: #7B5EA720; }
+
+  .music-upload-area {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem; cursor: pointer; padding: 1rem;
+    border: 1.5px dashed #C8B4E060; border-radius: 12px;
+    color: var(--lavender-light); font-size: 0.75rem; letter-spacing: 0.1em;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .music-upload-area:hover { border-color: var(--lavender-light); background: #fff1; }
+  .music-upload-area svg { width:32px; height:32px; stroke:currentColor; fill:none; stroke-width:1.5; }
+
+  audio.hidden { display: none; }
+
+  /* ══ WHATSAPP SHARE ══ */
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: #25D366; color: #fff;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.08em;
+    padding: 0.8rem 1.8rem; border-radius: 50px;
+    text-decoration: none; border: none; cursor: pointer;
+    box-shadow: 0 6px 24px #25D36650;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: 0.5rem;
+  }
+  .whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px #25D36670; }
+  .whatsapp-btn svg { width:22px; height:22px; fill:currentColor; }
+
+  /* ══ NAV DOTS ══ */
+  .nav-dots {
+    position: fixed; right: 1.2rem; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 0.6rem; z-index: 100;
+  }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--lavender-light); opacity: 0.4;
+    cursor: pointer; transition: opacity 0.3s, transform 0.3s;
+    border: none;
+  }
+  .dot.active { opacity: 1; transform: scale(1.3); background: var(--lavender-deep); }
+
+  /* ══ FLOATING ORBS ══ */
+  .orb {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, #fff3 0%, #C8B4E010 70%);
+    pointer-events: none;
+    animation: float ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.06); }
+  }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width: 480px) {
+    .photo-grid { gap: 0.7rem; }
+    .letter-paper { padding: 1.8rem 1.3rem; }
+    .music-player { padding: 1.2rem; }
+    .nav-dots { right: 0.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" aria-label="Page navigation">
+  <button class="dot active" onclick="goTo(0)" title="Wish"></button>
+  <button class="dot" onclick="goTo(1)" title="Memories"></button>
+  <button class="dot" onclick="goTo(2)" title="Letter"></button>
+  <button class="dot" onclick="goTo(3)" title="Celebrate"></button>
+</nav>
+
+<!-- ══ PAGE 1 – BIRTHDAY WISH ══ -->
+<section class="page" id="page1">
+  <!-- Floating orbs -->
+  <div class="orb" style="width:280px;height:280px;top:-80px;left:-80px;animation-duration:7s;"></div>
+  <div class="orb" style="width:200px;height:200px;bottom:60px;right:-60px;animation-duration:9s;animation-delay:-3s;"></div>
+
+  <!-- Falling petals -->
+  <div class="petals-bg" id="petals"></div>
+
+  <div class="wish-card">
+    <div class="wish-emoji">🎂</div>
+    <p class="wish-to">Wishing a very special</p>
+    <h1 class="wish-name">Happy Birthday</h1>
+    <h2 class="wish-title">Dear Mentor 💜</h2>
+
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-gem">✦</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <p class="wish-quote">
+      "On this beautiful day, the world celebrates the day<br>
+      you arrived and made everything brighter.<br>
+      May every wish your heart holds come true."
+    </p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section>
+
+<!-- ══ PAGE 2 – IMAGES ══ -->
+<section class="page" id="page2">
+  <div class="orb" style="width:250px;height:250px;top:-60px;right:-60px;animation-duration:8s;"></div>
+
+  <h2 class="section-title">Beautiful Memories</h2>
+  <p class="section-sub">✦ Our Cherished Moments ✦</p>
+
+  <div class="photo-grid">
+    <!-- Frame 1 -->
+    <div class="photo-frame" id="frame1" onclick="triggerUpload('img1')">
+      <label class="photo-upload-label">
+        <svg viewBox="0 0 24 24"><path d="M4 16l4-4 4 4 4-6 4 6"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+        Tap to add photo
+      </label>
+      <img class="photo-img" id="preview1" alt="Memory 1">
+      <input type="file" id="img1" accept="image/*" onchange="loadImg(this,'preview1','frame1')">
+      <div class="photo-caption">Memory One 💜</div>
+    </div>
+    <!-- Frame 2 -->
+    <div class="photo-frame" id="frame2" onclick="triggerUpload('img2')">
+      <label class="photo-upload-label">
+        <svg viewBox="0 0 24 24"><path d="M4 16l4-4 4 4 4-6 4 6"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+        Tap to add photo
+      </label>
+      <img class="photo-img" id="preview2" alt="Memory 2">
+      <input type="file" id="img2" accept="image/*" onchange="loadImg(this,'preview2','frame2')">
+      <div class="photo-caption">Memory Two 💜</div>
+    </div>
+    <!-- Frame 3 -->
+    <div class="photo-frame" id="frame3" onclick="triggerUpload('img3')">
+      <label class="photo-upload-label">
+        <svg viewBox="0 0 24 24"><path d="M4 16l4-4 4 4 4-6 4 6"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+        Tap to add photo
+      </label>
+      <img class="photo-img" id="preview3" alt="Memory 3">
+      <input type="file" id="img3" accept="image/*" onchange="loadImg(this,'preview3','frame3')">
+      <div class="photo-caption">Memory Three 💜</div>
+    </div>
+    <!-- Frame 4 -->
+    <div class="photo-frame" id="frame4" onclick="triggerUpload('img4')">
+      <label class="photo-upload-label">
+        <svg viewBox="0 0 24 24"><path d="M4 16l4-4 4 4 4-6 4 6"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+        Tap to add photo
+      </label>
+      <img class="photo-img" id="preview4" alt="Memory 4">
+      <input type="file" id="img4" accept="image/*" onchange="loadImg(this,'preview4','frame4')">
+      <div class="photo-caption">Memory Four 💜</div>
+    </div>
+  </div>
+  <p class="upload-note">📸 Tap each frame to upload your special photo</p>
+</section>
+
+<!-- ══ PAGE 3 – LETTER ══ -->
+<section class="page" id="page3">
+  <div class="orb" style="width:220px;height:220px;bottom:-40px;left:-50px;animation-duration:6s;"></div>
+
+  <div class="letter-wrap">
+    <h2 class="section-title">A Letter From The Heart</h2>
+    <p class="section-sub">✦ Written With Love ✦</p>
+
+    <div class="letter-paper">
+      <div class="letter-date" id="letterDate"></div>
+
+      <textarea class="letter-body" id="letterBody" rows="8"
+        placeholder="Dear [Name],
+
+On this special day, I want you to know how deeply you have touched my life. Your presence, your wisdom, and your warmth have been a guiding light in my journey.
+
+You have taught me not just lessons, but the courage to grow, the patience to learn, and the grace to love.
+
+Thank you for being exactly who you are. The world is a more beautiful place because you are in it.
+
+With all my love and gratitude..."></textarea>
+
+      <div class="letter-closing">Forever yours,</div>
+      <input class="letter-signature" id="letterSig" type="text" placeholder="Your Name" value="With Love 💜">
+    </div>
+    <p class="edit-note">✏️ Click inside the letter to personalize it</p>
+  </div>
+</section>
+
+<!-- ══ PAGE 4 – VIDEO + MUSIC + SHARE ══ -->
+<section class="page" id="page4">
+  <div class="orb" style="width:300px;height:300px;top:-100px;right:-80px;animation-duration:10s;opacity:0.3;"></div>
+
+  <h2 class="section-title">Celebrate Together</h2>
+  <p class="section-sub">✦ Video & Music ✦</p>
+
+  <div class="media-stack">
+
+    <!-- Video -->
+    <div class="video-box" id="videoBox" onclick="document.getElementById('vidFile').click()">
+      <div class="video-placeholder" id="vidPlaceholder">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Tap to upload a video</span>
+        <span style="opacity:0.6;font-size:0.65rem;">MP4, MOV, WEBM supported</span>
+      </div>
+      <video id="myVideo" controls></video>
+      <input type="file" id="vidFile" accept="video/*" onchange="loadVideo(this)">
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+      <div class="music-title">🎵 Birthday Serenade</div>
+
+      <audio id="myAudio" controls class="hidden"></audio>
+
+      <div class="music-upload-area" onclick="document.getElementById('audioFile').click()">
+        <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <span id="musicLabel">Upload your special song</span>
+        <span style="opacity:0.6;font-size:0.65rem;">MP3, WAV, OGG supported</span>
+        <input type="file" id="audioFile" accept="audio/*" onchange="loadAudio(this)">
+      </div>
+    </div>
+
+    <!-- WhatsApp Share -->
+    <div style="text-align:center;">
+      <a class="whatsapp-btn" id="waBtn" href="#" onclick="shareWhatsApp(event)">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Share on WhatsApp 💜
+      </a>
+      <p style="color:#C8B4E0;font-size:0.72rem;margin-top:0.8rem;letter-spacing:0.08em;">
+        Opens WhatsApp to share this birthday page
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // ── Falling Petals ──
+  (function(){
+    const container = document.getElementById('petals');
+    for(let i=0;i<18;i++){
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.style.left = Math.random()*100+'%';
+      p.style.width = (8+Math.random()*10)+'px';
+      p.style.height = (14+Math.random()*14)+'px';
+      p.style.animationDuration = (6+Math.random()*10)+'s';
+      p.style.animationDelay = (-Math.random()*12)+'s';
+      p.style.opacity = 0.3+Math.random()*0.5;
+      container.appendChild(p);
+    }
+  })();
+
+  // ── Date ──
+  const d = new Date();
+  document.getElementById('letterDate').textContent =
+    d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+  // ── Nav Dots ──
+  const pages = ['page1','page2','page3','page4'];
+  const dots = document.querySelectorAll('.dot');
+
+  function goTo(i){
+    document.getElementById(pages[i]).scrollIntoView({behavior:'smooth'});
+  }
+
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const i = pages.indexOf(e.target.id);
+        dots.forEach((d,j)=>d.classList.toggle('active',j===i));
+      }
+    });
+  },{threshold:0.5});
+  pages.forEach(id=>observer.observe(document.getElementById(id)));
+
+  // ── Photo Upload ──
+  function triggerUpload(id){ document.getElementById(id).click(); }
+  function loadImg(inp,previewId,frameId){
+    const f = inp.files[0]; if(!f) return;
+    const r = new FileReader();
+    r.onload = e=>{
+      document.getElementById(previewId).src = e.target.result;
+      document.getElementById(frameId).classList.add('has-img');
+    };
+    r.readAsDataURL(f);
+  }
+
+  // ── Video Upload ──
+  function loadVideo(inp){
+    const f = inp.files[0]; if(!f) return;
+    const url = URL.createObjectURL(f);
+    const v = document.getElementById('myVideo');
+    v.src = url;
+    document.getElementById('videoBox').classList.add('has-video');
+  }
+
+  // ── Audio Upload ──
+  function loadAudio(inp){
+    const f = inp.files[0]; if(!f) return;
+    const url = URL.createObjectURL(f);
+    const a = document.getElementById('myAudio');
+    a.src = url;
+    a.classList.remove('hidden');
+    document.getElementById('musicLabel').textContent = '🎵 ' + f.name;
+  }
+
+  // ── WhatsApp Share ──
+  function shareWhatsApp(e){
+    e.preventDefault();
+    const text = encodeURIComponent(
+      "🎂💜 Happy Birthday, Dear Mentor! 💜🎂\n\n" +
+      "I have a special birthday page just for you!\n\n" +
+      window.location.href
+    );
+    window.open('https://wa.me/?text='+text,'_blank');
+  }
+</script>
+</body>
+</html>
