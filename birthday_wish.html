@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --lav1: #f3eeff;
+    --lav2: #e0d4f7;
+    --lav3: #c9b8ef;
+    --lav4: #a78bdc;
+    --lav5: #7c5cbf;
+    --lav6: #4b2e83;
+    --white: #ffffff;
+    --text: #3a2060;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: var(--lav1);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ─── PAGES ─── */
+  .page {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(30px);
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .page.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+
+  /* ─── FLOATING PETALS BG ─── */
+  .petal {
+    position: fixed;
+    width: 12px; height: 12px;
+    border-radius: 50% 0 50% 0;
+    background: var(--lav3);
+    opacity: 0.35;
+    animation: floatPetal linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes floatPetal {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0.4; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ─── PAGE 1 — BIRTHDAY WISH ─── */
+  #p1 { background: linear-gradient(160deg, var(--lav1) 0%, var(--lav2) 100%); }
+  .candle-wrap { font-size: clamp(60px, 15vw, 120px); animation: pulse 2s ease-in-out infinite; margin-bottom: 10px; }
+  @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.07);} }
+  #p1 h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-style: italic;
+    color: var(--lav6);
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  #p1 .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 300;
+    color: var(--lav5);
+    letter-spacing: 4px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  #p1 .subtitle {
+    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+    color: var(--lav4);
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 400;
+    max-width: 400px;
+  }
+  .sparkle-row { font-size: 1.6rem; margin: 14px 0; letter-spacing: 8px; }
+
+  /* ─── PAGE 2 — PHOTOS ─── */
+  #p2 { background: linear-gradient(160deg, var(--lav2) 0%, var(--lav1) 100%); }
+  #p2 h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-style: italic;
+    color: var(--lav6);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 520px;
+    width: 100%;
+  }
+  .photo-frame {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid var(--lav3);
+    box-shadow: 0 8px 28px rgba(124,92,191,0.18);
+    aspect-ratio: 1 / 1;
+    background: var(--lav2);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  .photo-frame:hover { transform: scale(1.04); box-shadow: 0 14px 36px rgba(124,92,191,0.28); }
+  .photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-placeholder {
+    font-size: 2.5rem;
+    color: var(--lav4);
+    text-align: center;
+    padding: 10px;
+  }
+  .photo-placeholder p { font-size: 0.75rem; margin-top: 6px; color: var(--lav5); }
+
+  /* ─── PAGE 3 — LETTER ─── */
+  #p3 { background: linear-gradient(160deg, var(--lav1) 0%, var(--lav2) 100%); }
+  .letter-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid var(--lav3);
+    border-radius: 20px;
+    padding: clamp(20px, 5vw, 40px);
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 12px 40px rgba(124,92,191,0.15);
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .letter-card .dear {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-style: italic;
+    color: var(--lav5);
+    margin-bottom: 14px;
+  }
+  .letter-card p {
+    font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .letter-card .sign {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-style: italic;
+    color: var(--lav5);
+    margin-top: 10px;
+  }
+
+  /* ─── PAGE 4 — VIDEO ─── */
+  #p4 { background: linear-gradient(160deg, var(--lav2) 0%, var(--lav3) 100%); }
+  #p4 h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-style: italic;
+    color: var(--lav6);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .video-wrap {
+    width: 100%;
+    max-width: 520px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 3px solid var(--lav3);
+    box-shadow: 0 12px 36px rgba(124,92,191,0.25);
+    background: #000;
+  }
+  .video-wrap video {
+    width: 100%;
+    display: block;
+    border-radius: 14px;
+  }
+  .video-placeholder {
+    width: 100%; max-width: 520px;
+    height: 260px;
+    background: var(--lav2);
+    border-radius: 18px;
+    border: 2px dashed var(--lav4);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--lav5);
+    font-size: 3rem;
+  }
+  .video-placeholder p { font-size: 0.85rem; margin-top: 8px; letter-spacing: 1px; }
+
+  /* ─── PAGE 5 — FROM ─── */
+  #p5 { background: linear-gradient(160deg, var(--lav3) 0%, var(--lav2) 50%, var(--lav1) 100%); }
+  #p5 .from-wrap { text-align: center; }
+  #p5 .heart { font-size: clamp(60px, 14vw, 100px); animation: heartbeat 1.4s ease-in-out infinite; }
+  @keyframes heartbeat {
+    0%,100%{transform:scale(1);}
+    14%{transform:scale(1.15);}
+    28%{transform:scale(1);}
+    42%{transform:scale(1.1);}
+    70%{transform:scale(1);}
+  }
+  #p5 h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 4vw, 2.6rem);
+    font-style: italic;
+    color: var(--lav6);
+    margin: 10px 0 6px;
+  }
+  #p5 .from-label {
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    letter-spacing: 4px;
+    color: var(--lav4);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  #p5 .from-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--lav5);
+    font-style: italic;
+  }
+  #p5 .closing {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: var(--lav4);
+    margin-top: 16px;
+    letter-spacing: 1px;
+  }
+
+  /* ─── NAV BUTTONS ─── */
+  .nav-btn {
+    margin-top: 26px;
+    padding: 12px 36px;
+    background: linear-gradient(135deg, var(--lav4), var(--lav5));
+    color: white;
+    border: none;
+    border-radius: 40px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(124,92,191,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    z-index: 10;
+  }
+  .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(124,92,191,0.4); }
+  .nav-btn:active { transform: scale(0.97); }
+
+  /* ─── MUSIC BAR ─── */
+  #musicBar {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid var(--lav3);
+    border-radius: 40px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(124,92,191,0.15);
+    font-size: 0.85rem;
+    color: var(--lav5);
+  }
+  #musicBar button {
+    background: var(--lav4);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  #musicBar button:hover { background: var(--lav5); }
+  .music-note { animation: spin 4s linear infinite; display: inline-block; }
+  @keyframes spin { from{transform:rotate(0deg);}to{transform:rotate(360deg);} }
+
+  /* ─── PAGE DOTS ─── */
+  .dots {
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--lav3);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    border: 2px solid var(--lav4);
+  }
+  .dot.active { background: var(--lav5); transform: scale(1.3); }
+
+  /* scrollbar */
+  .letter-card::-webkit-scrollbar { width: 4px; }
+  .letter-card::-webkit-scrollbar-thumb { background: var(--lav3); border-radius: 4px; }
+
+  @media (max-width: 480px) {
+    .photo-grid { gap: 8px; }
+    .letter-card { padding: 18px; }
+    .nav-btn { padding: 10px 28px; font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── FLOATING PETALS ─── -->
+<div id="petalsContainer"></div>
+
+<!-- ══════════════════════════════════════
+     PAGE 1 — BIRTHDAY WISH
+══════════════════════════════════════ -->
+<div class="page active" id="p1">
+  <div class="candle-wrap">🕯️</div>
+  <h1>Happy Birthday</h1>
+  <div class="name">Dear Mentor</div>
+  <div class="sparkle-row">✨ 🎂 ✨</div>
+  <p class="subtitle">Wishing you a day as beautiful as you are</p>
+  <button class="nav-btn" onclick="goTo(2)">Next &rarr;</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 2 — 4 PHOTOS
+══════════════════════════════════════ -->
+<div class="page" id="p2">
+  <h2>Our Beautiful Moments 🌸</h2>
+  <div class="photo-grid">
+
+    <!-- PHOTO 1 — Replace src with your image path -->
+    <div class="photo-frame">
+      <img src="photo1.jpg" alt="Memory 1" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📷<p>Photo 1</p></div>'"/>
+    </div>
+
+    <!-- PHOTO 2 — Replace src with your image path -->
+    <div class="photo-frame">
+      <img src="photo2.jpg" alt="Memory 2" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📷<p>Photo 2</p></div>'"/>
+    </div>
+
+    <!-- PHOTO 3 — Replace src with your image path -->
+    <div class="photo-frame">
+      <img src="photo3.jpg" alt="Memory 3" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📷<p>Photo 3</p></div>'"/>
+    </div>
+
+    <!-- PHOTO 4 — Replace src with your image path -->
+    <div class="photo-frame">
+      <img src="photo4.jpg" alt="Memory 4" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📷<p>Photo 4</p></div>'"/>
+    </div>
+
+  </div>
+  <button class="nav-btn" onclick="goTo(3)">Next &rarr;</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 3 — LETTER
+══════════════════════════════════════ -->
+<div class="page" id="p3">
+  <div class="letter-card">
+    <div class="dear">Dear Mentor,</div>
+
+    <!-- ✏️ EDIT YOUR LETTER BELOW -->
+    <p>
+      On this very special day, I want to take a moment to tell you how incredibly
+      grateful I am to have you in my life. You are not just a mentor — you are a guiding
+      light, a safe harbour, and a constant source of warmth and wisdom.
+    </p>
+    <p>
+      Every lesson you have shared, every word of encouragement, every gentle nudge in
+      the right direction — they have shaped me more than you will ever know. You believed
+      in me even when I did not believe in myself, and that is a gift beyond words.
+    </p>
+    <p>
+      Today, as you celebrate another beautiful year around the sun, I wish you every joy
+      that your heart can hold. May this year bring you laughter that echoes, love that
+      multiplies, and dreams that finally take flight.
+    </p>
+    <p>
+      Thank you for being exactly who you are. The world is a better place because of you,
+      and my world is infinitely brighter because you chose to be a part of it.
+    </p>
+    <p>
+      With all my love and deepest gratitude,
+    </p>
+    <div class="sign">Always yours 💜</div>
+  </div>
+  <button class="nav-btn" onclick="goTo(4)">Next &rarr;</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 4 — VIDEO
+══════════════════════════════════════ -->
+<div class="page" id="p4">
+  <h2>A Special Message For You 🎬</h2>
+
+  <!-- ✏️ Replace "birthday_video.mp4" with your video filename -->
+  <div class="video-wrap" id="videoWrap">
+    <video controls poster="video_thumb.jpg"
+           onerror="document.getElementById('videoWrap').outerHTML='<div class=\'video-placeholder\'><span>🎬</span><p>Add your video as birthday_video.mp4</p></div>'">
+      <source src="birthday_video.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <button class="nav-btn" onclick="goTo(5)">Next &rarr;</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 5 — FROM
+══════════════════════════════════════ -->
+<div class="page" id="p5">
+  <div class="from-wrap">
+    <div class="heart">💜</div>
+    <h2>With All My Love</h2>
+    <p class="from-label">From</p>
+
+    <!-- ✏️ REPLACE "Your Name" with the sender's name -->
+    <div class="from-name">Your Name</div>
+
+    <p class="closing">🌸 Always in my heart, always grateful 🌸</p>
+    <button class="nav-btn" style="margin-top:22px;" onclick="goTo(1)">↩ Start Again</button>
+  </div>
+</div>
+
+<!-- ─── PAGE DOTS ─── -->
+<div class="dots" id="dots">
+  <div class="dot active" onclick="goTo(1)"></div>
+  <div class="dot" onclick="goTo(2)"></div>
+  <div class="dot" onclick="goTo(3)"></div>
+  <div class="dot" onclick="goTo(4)"></div>
+  <div class="dot" onclick="goTo(5)"></div>
+</div>
+
+<!-- ─── MUSIC BAR ─── -->
+<div id="musicBar">
+  <span class="music-note">🎵</span>
+  <span id="musicLabel">Birthday Song</span>
+  <button id="musicBtn" onclick="toggleMusic()" title="Play / Pause">▶</button>
+</div>
+
+<!-- ✏️ Replace "birthday_song.mp3" with your audio filename -->
+<audio id="bgMusic" loop>
+  <source src="birthday_song.mp3" type="audio/mpeg"/>
+</audio>
+
+<script>
+  let current = 1;
+  const total = 5;
+  const audio = document.getElementById('bgMusic');
+  let playing = false;
+
+  // ─── Petals ───
+  const container = document.getElementById('petalsContainer');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.cssText = `
+      left:${Math.random()*100}vw;
+      width:${8+Math.random()*12}px;
+      height:${8+Math.random()*12}px;
+      animation-duration:${6+Math.random()*10}s;
+      animation-delay:${Math.random()*10}s;
+      opacity:${0.2+Math.random()*0.3};
+      background:hsl(${270+Math.random()*30},${50+Math.random()*30}%,${75+Math.random()*15}%);
+    `;
+    container.appendChild(p);
+  }
+
+  // ─── Page Navigation ───
+  function goTo(n) {
+    const pages = document.querySelectorAll('.page');
+    const dots  = document.querySelectorAll('.dot');
+    pages.forEach(p => p.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    document.getElementById('p' + n).classList.add('active');
+    dots[n - 1].classList.add('active');
+    current = n;
+
+    // Auto-play music on first navigation
+    if (!playing && audio.src) { tryPlay(); }
+  }
+
+  // ─── Keyboard navigation ───
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' && current < total) goTo(current + 1);
+    if (e.key === 'ArrowLeft'  && current > 1)     goTo(current - 1);
+  });
+
+  // ─── Swipe support ───
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (dx < -50 && current < total) goTo(current + 1);
+    if (dx >  50 && current > 1)     goTo(current - 1);
+  }, {passive:true});
+
+  // ─── Music ───
+  function tryPlay() {
+    audio.play().then(() => {
+      playing = true;
+      document.getElementById('musicBtn').textContent = '⏸';
+    }).catch(() => {});
+  }
+
+  function toggleMusic() {
+    if (playing) {
+      audio.pause(); playing = false;
+      document.getElementById('musicBtn').textContent = '▶';
+    } else {
+      tryPlay();
+    }
+  }
+
+  // Auto-play attempt on first user gesture anywhere
+  document.addEventListener('click', function tryFirst() {
+    if (!playing) tryPlay();
+    document.removeEventListener('click', tryFirst);
+  }, {once: true});
+</script>
+</body>
+</html>
